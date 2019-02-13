@@ -7,7 +7,7 @@ This Framework specifically designed to run UI Automation using Maven
   
   Example:
   mvn test -Dbrowser=chrome  -- Browsertype can either be chrome or firefox ; but at a time only one browsertype
-  This command will run and triggers all the  scenarios and each browser used to run one feature file
+  This command triggers multiple instance of browser and each browser instance uses a feature file to run the scenarios.
   
   Same way we can add other command line parameters to run specific tags
   mvn test -Dbrowser=firefox -Dcucumber.options="--tags @sanity,@functional"
