@@ -9,7 +9,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
@@ -23,7 +25,6 @@ public class Hooks {
 	@Before
 	public void openBrowser() throws MalformedURLException {
 		String browser = System.getProperty("browser");
-		browser="chrome";
 		switch (browser)
 		{
 		case "chrome":
@@ -31,12 +32,19 @@ public class Hooks {
 			driver = new ChromeDriver();
 			break;
 		case "firefox":
-			driver = new FirefoxDriver();
+			System.setProperty("webdriver.gecko.driver","./Drivers/GeckoDriver.exe");
+			/*DesiredCapabilities capabilities = DesiredCapabilities.firefox();
+			capabilities.setCapability("marionette",true);
+			driver= new FirefoxDriver(capabilities);*/
+			FirefoxOptions options = new FirefoxOptions();
+			driver= new FirefoxDriver(options);
+			options.setLegacy(true);
 			break;
 		case "ie":
 			driver = new InternetExplorerDriver();
 			break;
 		default:
+			System.setProperty("webdriver.chrome.driver", "./Drivers/chromedriver.exe");
 			driver = new ChromeDriver();
 			break;
 		}
@@ -61,7 +69,7 @@ public class Hooks {
 		        }
 		        
 		        }
-		driver.close();
+//		driver.close();
 		driver.quit();
 	}
 	

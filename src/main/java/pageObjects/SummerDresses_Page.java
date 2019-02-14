@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -60,6 +61,7 @@ public class SummerDresses_Page {
 	
 	public void click_on_blue_color() {
 		Actions actions = new Actions(driver);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", color_blue);
 		actions.moveToElement(color_blue).perform();
 		try {
 			Thread.sleep(2000);
@@ -67,7 +69,9 @@ public class SummerDresses_Page {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		actions.moveToElement(color_blue).click().perform();
+//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", color_blue);
+//		actions.moveToElement(color_blue).click().perform();
+		color_blue.click();
 	}
 	
 	public ArrayList<String> getProductPrice() {

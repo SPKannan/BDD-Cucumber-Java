@@ -1,5 +1,6 @@
 package pageObjects;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -39,6 +40,7 @@ public class Home_Page {
 	
 	public void Click_summerdresses_Link() {
 		Actions action = new Actions(driver);
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", menu_dresses);
 		action.moveToElement(menu_dresses).perform();
 		try {
 			Thread.sleep(1000);
@@ -46,6 +48,7 @@ public class Home_Page {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", summer_dresses);
 		action.moveToElement(summer_dresses).click().perform();
 	}
 
