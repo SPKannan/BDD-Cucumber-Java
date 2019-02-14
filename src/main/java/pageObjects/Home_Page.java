@@ -9,15 +9,20 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
+import selenium.Wait;
+
 public class Home_Page {
 
 	private WebDriver driver;
+
+	private Wait wait;
 	
 	public Home_Page(WebDriver driver) {
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 		AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(driver, 30);
 		PageFactory.initElements(factory, this);
+		wait = new Wait(driver);
 	}
 	
 	@FindBy(how = How.CLASS_NAME, using = "login")
@@ -42,12 +47,7 @@ public class Home_Page {
 		Actions action = new Actions(driver);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", menu_dresses);
 		action.moveToElement(menu_dresses).perform();
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		wait.waitForElementVisible(summer_dresses);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", summer_dresses);
 		action.moveToElement(summer_dresses).click().perform();
 	}

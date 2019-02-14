@@ -54,12 +54,6 @@ public class Summarycart {
 		winHandleBefore = driver.getWindowHandle();
 		// Perform the click operation that opens new window
 		SelectedDresspage.click_add_to_cart();
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	@Then("I verify same productname color and quantity displayed in Cart Summary page")

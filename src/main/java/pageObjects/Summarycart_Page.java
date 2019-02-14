@@ -7,15 +7,24 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
+import selenium.Wait;
+
 public class Summarycart_Page {
 
+	private WebDriver driver;
 
+	private Wait wait;
 	public Summarycart_Page(WebDriver driver){
+		this.driver=driver;
 		PageFactory.initElements(driver, this);
 		AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(driver, 30);
 		PageFactory.initElements(factory, this);
+		wait = new Wait(driver);
 	} 
 
+	@FindBy(how=How.ID, using="layer_cart")
+	public static WebElement summarycart;
+	
 	@FindBy(how=How.ID, using="layer_cart_product_title")
 	public static WebElement producttitle;
 
@@ -29,6 +38,7 @@ public class Summarycart_Page {
 	public static WebElement close;
 	
 	public String  getcartproducttitle() {
+		wait.waitForElementVisible(summarycart);
 		return producttitle.getText();
 		
 	}
@@ -42,6 +52,7 @@ public class Summarycart_Page {
 	
 	public void close_summarycart() {
 		close.click();
+		
 	}
 
 }

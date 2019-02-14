@@ -7,12 +7,17 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 
+import selenium.Wait;
+
 public class SelectedDress_Page {
-	
+	private WebDriver driver;
+	private Wait wait;
 	public SelectedDress_Page(WebDriver driver){
+		this.driver=driver;
 		PageFactory.initElements(driver, this);
 		AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(driver, 30);
 		PageFactory.initElements(factory, this);
+		wait = new Wait(driver);
 	}  
 	
 	@FindBy(how=How.XPATH, using="//*[@id='center_column']//h1")
@@ -43,7 +48,7 @@ public class SelectedDress_Page {
 	}
 	
 	public void  click_add_to_cart() {		
-		addtocart.click();		
+		addtocart.click();
 	}
 	
 }

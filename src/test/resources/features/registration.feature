@@ -8,8 +8,8 @@ Feature: Registration automationpractice website
     Then An error message "<error message>" will appear on the page
 
     Examples: 
-      | email address    | error message |
-      | invalidemail@abc | Invalid       |
+      | email address    | error message          |
+      | invalidemail@abc | Invalid email address. |
 
   @sanity
   Scenario Outline: Successful registration

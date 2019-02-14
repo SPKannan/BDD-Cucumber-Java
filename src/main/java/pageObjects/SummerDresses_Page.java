@@ -14,14 +14,18 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
 import org.openqa.selenium.support.ui.Select;
 
+import selenium.Wait;
+
 public class SummerDresses_Page {
 	
 	private WebDriver driver;
+	private Wait wait;
 	public SummerDresses_Page(WebDriver driver){
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 		AjaxElementLocatorFactory factory = new AjaxElementLocatorFactory(driver, 30);
 		PageFactory.initElements(factory, this);
+		wait = new Wait(driver);
 	}  
 	
 	@FindBy(how=How.CLASS_NAME, using="cat-name")
@@ -29,6 +33,9 @@ public class SummerDresses_Page {
 	
 	@FindBy(how=How.ID, using="selectProductSort")
 	public static WebElement drpdwn_sort_by;
+	
+	@FindBy(how=How.XPATH, using="//*[@id='layered_ajax_loader']/p/img")
+	public static WebElement gifloader;
 	
 	@FindBy(how=How.ID, using="color_20")
 	public static WebElement color_blue;
@@ -57,32 +64,22 @@ public class SummerDresses_Page {
 	public void sort_by_value(String str_drpdwn_value) {
 		Select drpdwn= new Select(drpdwn_sort_by);
 		drpdwn.selectByVisibleText((str_drpdwn_value));
+		System.out.println("gifloader.isDisplayed() :"+gifloader.isDisplayed());
+		wait.waitForElementInVisible(gifloader);
 	}
 	
 	public void click_on_blue_color() {
 		Actions actions = new Actions(driver);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", color_blue);
 		actions.moveToElement(color_blue).perform();
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-//		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", color_blue);
-//		actions.moveToElement(color_blue).click().perform();
+		wait.waitForElementVisible(color_blue);
+//		Wait.untilJqueryIsDone(driver);
 		color_blue.click();
 	}
 	
 	public ArrayList<String> getProductPrice() {
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		ArrayList<String> obtainedList = new ArrayList<>(); 
-		for(WebElement we:product_price){//PrintedSummerDress1.product_price
+		for(WebElement we:product_price){
 		   obtainedList.add(we.getText());
 		}
 		
