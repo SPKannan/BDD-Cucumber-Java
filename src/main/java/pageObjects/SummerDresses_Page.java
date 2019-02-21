@@ -64,16 +64,17 @@ public class SummerDresses_Page {
 	public void sort_by_value(String str_drpdwn_value) {
 		Select drpdwn= new Select(drpdwn_sort_by);
 		drpdwn.selectByVisibleText((str_drpdwn_value));
-		System.out.println("gifloader.isDisplayed() :"+gifloader.isDisplayed());
-		wait.waitForElementInVisible(gifloader);
+		wait.untilJqueryIsDone(driver);
+		wait.untilPageLoadComplete(driver);
 	}
 	
 	public void click_on_blue_color() {
 		Actions actions = new Actions(driver);
 		((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", color_blue);
 		actions.moveToElement(color_blue).perform();
+		wait.untilJqueryIsDone(driver);
+		wait.untilPageLoadComplete(driver);
 		wait.waitForElementVisible(color_blue);
-//		Wait.untilJqueryIsDone(driver);
 		color_blue.click();
 	}
 	
